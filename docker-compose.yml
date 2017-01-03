@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./storage:/storage
+            - ./nginx/web.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - code-network
+    php-7:
+        build: php-fpm-7
+        volumes:
+            - ./storage:/storage
+        networks:
+            - code-network
+    php-5.6:
+        build: php-fpm-5.6
+        volumes:
+            - ./storage:/storage
+        networks:
+            - code-network
+    mysql-5.7:
+        image: mysql:5.7
+        volumes:
+         - /var/lib/mysql5.7
+        environment:
+         - MYSQL_ROOT_PASSWORD=root
+         - MYSQL_DATABASE=database
+        networks:
+            - code-network
+    mysql-5.5:
+        image: mysql:5.5
+        volumes:
+         - /var/lib/mysql5.5
+        environment:
+         - MYSQL_ROOT_PASSWORD=root
+         - MYSQL_DATABASE=database
+        networks:
+            - code-network
+networks:
+    code-network:
+        driver: bridge
