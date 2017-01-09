@@ -34,7 +34,7 @@ services:
         image: mysql:5.7
         container_name: allmn_mysql-5.7
         volumes:
-         - /var/lib/mysql5.7
+            - /var/lib/mysql5.7
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
@@ -44,10 +44,20 @@ services:
         image: mysql:5.5
         container_name: allmn_mysql-5.5
         volumes:
-         - /var/lib/mysql5.5
+            - /var/lib/mysql5.5
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
+        networks:
+            - network-back
+    percona:
+        image: percona
+        container_name: allmn_percona
+        volumes:
+            - /var/lib/percona
+        environment:
+          MYSQL_USERNAME: root
+          MYSQL_ROOT_PASSWORD: root
         networks:
             - network-back
 # ACESSAR AS BASES http://127.0.0.1:8888/ ;)
@@ -58,9 +68,9 @@ services:
             PMA_ARBITRARY: 1
         restart: always
         ports:
-         - 8888:80
+            - 8888:80
         volumes:
-         - /sessions
+            - /sessions
         networks:
             - network-back
 networks:
