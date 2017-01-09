@@ -31,8 +31,8 @@ services:
         volumes:
          - /var/lib/mysql5.7
         environment:
-         - MYSQL_ROOT_PASSWORD=root
-         - MYSQL_DATABASE=database
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: root
         networks:
             - code-network
     mysql-5.5:
@@ -41,8 +41,20 @@ services:
         volumes:
          - /var/lib/mysql5.5
         environment:
-         - MYSQL_ROOT_PASSWORD=root
-         - MYSQL_DATABASE=database
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            - code-network
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: allmn_phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+         - 8888:80
+        volumes:
+         - /sessions
         networks:
             - code-network
 networks:
