@@ -8,7 +8,7 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./storage:/storage
+            - ./www:/www
             - ./nginx:/etc/nginx/conf.d
         networks:
             - network-front
@@ -17,7 +17,7 @@ services:
         build: php-fpm-7
         container_name: allmn_php-7
         volumes:
-            - ./storage:/storage
+            - ./www:/www
         networks:
             - network-front
             - network-back
@@ -25,7 +25,7 @@ services:
         build: php-fpm-5.6
         container_name: allmn_php-5.6
         volumes:
-            - ./storage:/storage
+            - ./www:/www
         networks:
             - network-front
             - network-back
