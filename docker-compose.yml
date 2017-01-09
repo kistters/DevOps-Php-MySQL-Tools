@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+# Nginx :0  easy way :80 :D 
     web:
         image: nginx:latest
         container_name: allmn_nginx
@@ -10,21 +11,25 @@ services:
             - ./storage:/storage
             - ./nginx:/etc/nginx/conf.d
         networks:
-            - code-network
+            - network-front
+# PHPs usei o build [diretorios] para instalar libs ;)
     php-7:
         build: php-fpm-7
         container_name: allmn_php-7
         volumes:
             - ./storage:/storage
         networks:
-            - code-network
+            - network-front
+            - network-back
     php-5.6:
         build: php-fpm-5.6
         container_name: allmn_php-5.6
         volumes:
             - ./storage:/storage
         networks:
-            - code-network
+            - network-front
+            - network-back
+# BASE DE DADOS
     mysql-5.7:
         image: mysql:5.7
         container_name: allmn_mysql-5.7
@@ -34,7 +39,7 @@ services:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
         networks:
-            - code-network
+            - network-back
     mysql-5.5:
         image: mysql:5.5
         container_name: allmn_mysql-5.5
@@ -44,7 +49,8 @@ services:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
         networks:
-            - code-network
+            - network-back
+# ACESSAR AS BASES http://127.0.0.1:8888/ ;)
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: allmn_phpmyadmin
@@ -56,7 +62,11 @@ services:
         volumes:
          - /sessions
         networks:
-            - code-network
+            - network-back
 networks:
-    code-network:
+    # basicamente o nginx e quem precisa dele.
+    network-front:
+        driver: bridge
+    # basicamente o que NAO precisa do nginx.
+    network-back:
         driver: bridge
