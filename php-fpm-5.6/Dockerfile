@@ -9,5 +9,9 @@ RUN apt-get update && apt-get install -y \
 	&& docker-php-ext-install mcrypt \
 	&& docker-php-ext-install intl \
 	&& docker-php-ext-install opcache \
-	&& docker-php-ext-install mbstring 
+	&& docker-php-ext-install mbstring \
+	&& pecl install xdebug  \
+    && docker-php-ext-enable xdebug
+    
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 CMD ["php-fpm"]
