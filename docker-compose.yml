@@ -9,15 +9,18 @@ services:
             - "80:80"
         volumes:
             - ./www:/www
+            - /storage:/storage
             - ./nginx:/etc/nginx/conf.d
         networks:
             - network-front
+
 # PHPs usei o build [diretorios] para instalar libs ;)
     php-7:
         build: php-fpm-7
         container_name: allmn_php-7
         volumes:
             - ./www:/www
+            - /storage:/storage
         networks:
             - network-front
             - network-back
@@ -26,15 +29,17 @@ services:
         container_name: allmn_php-5.6
         volumes:
             - ./www:/www
+            - /storage:/storage
         networks:
             - network-front
             - network-back
+
 # BASE DE DADOS
     mysql-5.7:
         image: mysql:5.7
         container_name: allmn_mysql-5.7
         volumes:
-            - /var/lib/mysql5.7
+            - mysql-5.7:/var/lib/mysql
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
@@ -44,7 +49,7 @@ services:
         image: mysql:5.5
         container_name: allmn_mysql-5.5
         volumes:
-            - /var/lib/mysql5.5
+            - mysql-5.5:/var/lib/mysql
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
@@ -54,12 +59,13 @@ services:
         image: percona
         container_name: allmn_percona
         volumes:
-            - /var/lib/percona
+            - percona:/var/lib/mysql
         environment:
           MYSQL_USERNAME: root
           MYSQL_ROOT_PASSWORD: root
         networks:
             - network-back
+
 # ACESSAR AS BASES http://127.0.0.1:8888/ ;)
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -73,6 +79,8 @@ services:
             - /sessions
         networks:
             - network-back
+
+# Networks links internos para os services names ;)
 networks:
     # basicamente o nginx e quem precisa dele.
     network-front:
@@ -80,3 +88,9 @@ networks:
     # basicamente o que NAO precisa do nginx.
     network-back:
         driver: bridge
+
+# using volumes Docker [dir]
+volumes:
+    percona:
+    mysql-5.7:
+    mysql-5.5:
