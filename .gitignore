@@ -3,4 +3,4 @@
 ## CONFIGS ##
 #############
 
-#/nginx/storage.conf
+/nginx/conf.d
