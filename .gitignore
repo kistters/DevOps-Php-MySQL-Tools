@@ -4,3 +4,4 @@
 #############
 
 /nginx/conf.d
+/nginx/includes.d
