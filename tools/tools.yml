@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+
+#MailHog idea de um amigo
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    container_name: allmn_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - network-front
+      - network-back
+
+# Redis para quem sabe usar
+  redis:
+    image: redis
+    container_name: allmn_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+        - network-front
+        - network-back
+
+# acessar as Bases Mysql rapidamente pelo Browser
+# ACESSAR AS BASES http://127.0.0.1:8888/ || http://0.0.0.0:8888 ;)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    container_name: allmn_phpmyadmin
+    environment:
+        PMA_ARBITRARY: 1
+    ports:
+        - 8888:80
+    volumes:
+        - /sessions
+    networks:
+        - network-back

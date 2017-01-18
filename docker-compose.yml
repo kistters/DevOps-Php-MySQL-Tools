@@ -17,18 +17,16 @@ services:
 
 # PHPs extends file: é a referencia :D assim deixo tudo separado
     php-7:
-      restart: always
       extends:
         file: php/php.yml
         service: php-7
 
     php-5.6:
-      restart: always
       extends:
         file: php/php.yml
         service: php-5.6
 
-# BASE DE DADOS MySQL
+# BASE DE DADOS MySQL # TODO talvez passar para um .yml separado
     mysql-5.7:
         image: mysql:5.7
         container_name: allmn_mysql-5.7
@@ -60,24 +58,25 @@ services:
         networks:
             - network-back
 
-# ACESSAR AS BASES http://127.0.0.1:8888/ ;)
+# USAR extends para Tools ;D
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: allmn_phpmyadmin
-        environment:
-            PMA_ARBITRARY: 1
-        restart: always
-        ports:
-            - 8888:80
-        volumes:
-            - /sessions
-        networks:
-            - network-back
+      extends:
+        file: tools/tools.yml
+        service: phpmyadmin
 
+    mailhog:
+      extends:
+        file: tools/tools.yml
+        service: mailhog
+
+    redis:
+      extends:
+        file: tools/tools.yml
+        service: redis
 
 # Networks links internos para os services names ;)
 networks:
-    # basicamente o nginx e quem precisa dele.
+    # basicamente o nginx, e quem precisa dele.
     network-front:
         driver: bridge
     # basicamente o que NAO precisa do nginx.
