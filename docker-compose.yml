@@ -7,6 +7,7 @@ services:
         container_name: allmn_nginx
         ports:
             - "80:80"
+            - "443:443"
         volumes:
             - ./nginx/includes.d:/etc/nginx/includes.d # dir usado para includes files nginx config
             - ./nginx/conf.d:/etc/nginx/conf.d
@@ -14,27 +15,20 @@ services:
         networks:
             - network-front
 
-# PHPs usei o build [diretorios] para instalar libs ;)
+# PHPs extends file: é a referencia :D assim deixo tudo separado
     php-7:
-        build: php/php-fpm-7
-        container_name: allmn_php-7
-        volumes:
-            - ./www:/www
-            - /storage:/storage
-        networks:
-            - network-front
-            - network-back
-    php-5.6:
-        build: php/php-fpm-5.6
-        container_name: allmn_php-5.6
-        volumes:
-            - ./www:/www
-            - /storage:/storage
-        networks:
-            - network-front
-            - network-back
+      restart: always
+      extends:
+        file: php/php.yml
+        service: php-7
 
-# BASE DE DADOS
+    php-5.6:
+      restart: always
+      extends:
+        file: php/php.yml
+        service: php-5.6
+
+# BASE DE DADOS MySQL
     mysql-5.7:
         image: mysql:5.7
         container_name: allmn_mysql-5.7
@@ -79,6 +73,7 @@ services:
             - /sessions
         networks:
             - network-back
+
 
 # Networks links internos para os services names ;)
 networks:
