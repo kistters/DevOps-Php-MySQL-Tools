@@ -1,7 +1,3 @@
 #############
 ##  LOCAL  ##
-## CONFIGS ##
 #############
-
-/nginx/conf.d
-/nginx/includes.d
