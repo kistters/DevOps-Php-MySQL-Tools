@@ -11,7 +11,7 @@ services:
         volumes:
             - ./nginx/includes.d:/etc/nginx/includes.d # dir usado para includes files nginx config
             - ./nginx/conf.d:/etc/nginx/conf.d
-            - /storage:/storage # local dir [projects]
+            - /storage:/storage # local dir [projects] remember {find . -type f -exec chmod 544 {} \; && find . -type d -exec chmod 755 {} \;}
         networks:
             - network-front
 
