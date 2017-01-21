@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+# BASE DE DADOS MySQL versions 
+    mysql-5.7:
+        image: mysql:5.7
+        restart: always
+        container_name: allmn_mysql-5.7
+        volumes:
+            - ./data/mysql-5.7:/var/lib/mysql
+            - ./dumps:/dumps
+        environment:
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            - network-back
+
+    mysql-5.5:
+        image: mysql:5.5
+        restart: always
+        container_name: allmn_mysql-5.5
+        volumes:
+            - ./data/mysql-5.5:/var/lib/mysql
+            - ./dumps:/dumps
+        environment:
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            - network-back
+
+    percona:
+        image: percona
+        restart: always
+        container_name: allmn_percona
+        volumes:
+            - ./data/percona:/var/lib/mysql
+            - ./dumps:/dumps
+        environment:
+          MYSQL_USERNAME: root
+          MYSQL_ROOT_PASSWORD: root
+        networks:
+            - network-back

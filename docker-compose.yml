@@ -27,36 +27,21 @@ services:
         service: php-5.6
 
 # BASE DE DADOS MySQL # TODO talvez passar para um .yml separado
+
     mysql-5.7:
-        image: mysql:5.7
-        container_name: allmn_mysql-5.7
-        volumes:
-            - mysql-5.7:/var/lib/mysql
-        environment:
-            MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: root
-        networks:
-            - network-back
+       extends:
+        file: mysql/mysql.yml
+        service: mysql-5.7
+
     mysql-5.5:
-        image: mysql:5.5
-        container_name: allmn_mysql-5.5
-        volumes:
-            - mysql-5.5:/var/lib/mysql
-        environment:
-            MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: root
-        networks:
-            - network-back
+       extends:
+        file: mysql/mysql.yml
+        service: mysql-5.5
+
     percona:
-        image: percona
-        container_name: allmn_percona
-        volumes:
-            - percona:/var/lib/mysql
-        environment:
-          MYSQL_USERNAME: root
-          MYSQL_ROOT_PASSWORD: root
-        networks:
-            - network-back
+       extends:
+        file: mysql/mysql.yml
+        service: percona
 
 # USAR extends para Tools ;D
     phpmyadmin:
@@ -82,9 +67,3 @@ networks:
     # basicamente o que NAO precisa do nginx.
     network-back:
         driver: bridge
-
-# using volumes Docker [dir]
-volumes:
-    percona:
-    mysql-5.7:
-    mysql-5.5:

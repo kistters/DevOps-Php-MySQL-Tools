@@ -27,6 +27,8 @@ services:
 
 # acessar as Bases Mysql rapidamente pelo Browser
 # ACESSAR AS BASES http://127.0.0.1:8888/ || http://0.0.0.0:8888 ;)
+# caso o dump seja muito grande e precise ser executado via terminal 
+# no mysql/mysql.yml declaramos um [dir] para criar volume nos conteiners 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
