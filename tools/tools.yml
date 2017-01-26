@@ -6,7 +6,7 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     restart: always
-    container_name: allmn_mailhog
+    container_name: work_mailhog
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -17,7 +17,7 @@ services:
 # Redis para quem sabe usar
   redis:
     image: redis
-    container_name: allmn_redis
+    container_name: work_redis
     restart: always
     ports:
       - "6379:6379"
@@ -32,7 +32,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
-    container_name: allmn_phpmyadmin
+    container_name: work_phpmyadmin
     environment:
         PMA_ARBITRARY: 1
     ports:

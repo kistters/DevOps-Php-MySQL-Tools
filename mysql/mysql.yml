@@ -5,7 +5,7 @@ services:
     mysql-5.7:
         image: mysql:5.7
         restart: always
-        container_name: allmn_mysql-5.7
+        container_name: work_mysql-5.7
         volumes:
             - ./data/mysql-5.7:/var/lib/mysql
             - ./dumps:/dumps
@@ -18,7 +18,7 @@ services:
     mysql-5.5:
         image: mysql:5.5
         restart: always
-        container_name: allmn_mysql-5.5
+        container_name: work_mysql-5.5
         volumes:
             - ./data/mysql-5.5:/var/lib/mysql
             - ./dumps:/dumps
@@ -31,7 +31,7 @@ services:
     percona:
         image: percona
         restart: always
-        container_name: allmn_percona
+        container_name: work_percona
         volumes:
             - ./data/percona:/var/lib/mysql
             - ./dumps:/dumps

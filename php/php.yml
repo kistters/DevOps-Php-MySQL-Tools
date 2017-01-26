@@ -6,7 +6,7 @@ services:
     php-7:
         build: php-fpm-7
         restart: always
-        container_name: allmn_php-7
+        container_name: work_php-7
         volumes:
             - /storage:/storage # lembrando de configurar o volumes com a pasta dos seus projetos
         networks:
@@ -16,7 +16,7 @@ services:
     php-5.6:
         build: php-fpm-5.6
         restart: always
-        container_name: allmn_php-5.6
+        container_name: work_php-5.6
         volumes:
             - /storage:/storage
         networks:

@@ -4,7 +4,7 @@ services:
 # Nginx :0  easy way :80 :D 
     web:
         image: nginx:latest
-        container_name: allmn_nginx
+        container_name: work_nginx
         ports:
             - "80:80"
             - "443:443"
