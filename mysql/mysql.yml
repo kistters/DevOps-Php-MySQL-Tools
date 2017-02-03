@@ -9,6 +9,7 @@ services:
         volumes:
             - ./data/mysql-5.7:/var/lib/mysql
             - ./dumps:/dumps
+            #- ./my.conf:/etc/mysql/my.cnf
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
@@ -22,6 +23,7 @@ services:
         volumes:
             - ./data/mysql-5.5:/var/lib/mysql
             - ./dumps:/dumps
+            - ./my55.conf:/etc/mysql/my.cnf
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
