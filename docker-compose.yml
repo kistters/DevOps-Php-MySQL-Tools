@@ -13,18 +13,28 @@ services:
             - ./nginx/conf.d:/etc/nginx/conf.d
             - /storage:/storage # local dir [projects] remember {find . -type f -exec chmod 544 {} \; && find . -type d -exec chmod 755 {} \;}
         networks:
-            - network-front
+            - network-back
 
 # PHPs extends file: é a referencia :D assim deixo tudo separado
-    php-7:
-      extends:
-        file: php/php.yml
-        service: php-7
+    # php-7:
+    #   extends:
+    #     file: php/php.yml
+    #     service: php-7
 
     php-5.6:
       extends:
         file: php/php.yml
         service: php-5.6
+        
+    # php-5.4:
+    #   extends:
+    #     file: php/php.yml
+    #     service: php-5.4
+
+    php-5.3:
+      extends:
+        file: php/php.yml
+        service: php-5.3
 
 # BASE DE DADOS MySQL # TODO talvez passar para um .yml separado
 
@@ -49,15 +59,15 @@ services:
         file: tools/tools.yml
         service: phpmyadmin
 
-    mailhog:
-      extends:
-        file: tools/tools.yml
-        service: mailhog
+    # mailhog:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: mailhog
 
-    redis:
-      extends:
-        file: tools/tools.yml
-        service: redis
+    # redis:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: redis
 
 # Networks links internos para os services names ;)
 networks:

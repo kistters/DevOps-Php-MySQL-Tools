@@ -1,18 +1,15 @@
-FROM php:5.6-fpm
+FROM alterway/php:5.3-fpm
 
 # Install libs
 RUN apt-get update && apt-get install -y \
 	libmcrypt-dev  \
 	libicu-dev \
 	mysql-client \
-	zlib1g-dev \
 	&& docker-php-ext-install pdo_mysql \
  		iconv \
  		mcrypt \
 		intl \
- 		opcache \
-		mbstring \
-		zip
+		mbstring
 
 # php gd
 RUN apt-get update -y && apt-get install -y \
@@ -26,14 +23,6 @@ RUN apt-get update -y && apt-get install -y \
     php-soap \
   	&& apt-get clean -y \
   	&& docker-php-ext-install soap
-
-
-# xDebug
-RUN apt-get update -y && apt-get install -y \
- 	&& pecl install xdebug  \
-    && docker-php-ext-enable xdebug
-
-COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 
 CMD ["php-fpm"]
