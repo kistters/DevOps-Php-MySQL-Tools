@@ -28,15 +28,15 @@ services:
 
 # BASE DE DADOS MySQL # TODO talvez passar para um .yml separado
 
-    mysql-5.7:
-       extends:
-        file: mysql/mysql.yml
-        service: mysql-5.7
+    # mysql-5.7:
+    #    extends:
+    #     file: mysql/mysql.yml
+    #     service: mysql-5.7
 
-    mysql-5.5:
-       extends:
-        file: mysql/mysql.yml
-        service: mysql-5.5
+    # mysql-5.5:
+    #    extends:
+    #     file: mysql/mysql.yml
+    #     service: mysql-5.5
 
     percona:
        extends:
@@ -49,15 +49,15 @@ services:
         file: tools/tools.yml
         service: phpmyadmin
 
-    mailhog:
-      extends:
-        file: tools/tools.yml
-        service: mailhog
+    # mailhog:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: mailhog
 
-    redis:
-      extends:
-        file: tools/tools.yml
-        service: redis
+    # redis:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: redis
 
 # Networks links internos para os services names ;)
 networks:
