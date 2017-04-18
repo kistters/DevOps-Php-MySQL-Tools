@@ -11,7 +11,6 @@ services:
       - "1025:1025"
       - "8025:8025"
     networks:
-      - network-front
       - network-back
 
 # Redis para quem sabe usar
@@ -22,7 +21,6 @@ services:
     ports:
       - "6379:6379"
     networks:
-        - network-front
         - network-back
 
 # acessar as Bases Mysql rapidamente pelo Browser
