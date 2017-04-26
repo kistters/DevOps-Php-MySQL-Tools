@@ -59,10 +59,10 @@ services:
         file: tools/tools.yml
         service: phpmyadmin
 
-    # mailhog:
-    #   extends:
-    #     file: tools/tools.yml
-    #     service: mailhog
+    mailhog:
+      extends:
+        file: tools/tools.yml
+        service: mailhog
 
     # redis:
     #   extends:
