@@ -16,25 +16,25 @@ services:
             - network-back
 
 # PHPs extends file: é a referencia :D assim deixo tudo separado
-    # php-7:
-    #   extends:
-    #     file: php/php.yml
-    #     service: php-7
-
-    php-5.6:
+    php-7:
       extends:
         file: php/php.yml
-        service: php-5.6
+        service: php-7
+
+    # php-5.6:
+    #   extends:
+    #     file: php/php.yml
+    #     service: php-5.6
         
     # php-5.4:
     #   extends:
     #     file: php/php.yml
     #     service: php-5.4
 
-    php-5.3:
-      extends:
-        file: php/php.yml
-        service: php-5.3
+    # php-5.3:
+    #   extends:
+    #     file: php/php.yml
+    #     service: php-5.3
 
 # BASE DE DADOS MySQL # TODO talvez passar para um .yml separado
 
