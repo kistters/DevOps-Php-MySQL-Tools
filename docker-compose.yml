@@ -54,6 +54,17 @@ services:
     #     file: tools/tools.yml
     #     service: redis
 
+# Using to test concepts 
+    elasticsearch:
+        image: elasticsearch:latest
+        restart: always
+        container_name: work_elastic
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        networks:
+            - network-back
+
 # Networks links internos para os services names ;)
 networks:
     # basicamente o nginx, e quem precisa dele.
