@@ -40,3 +40,5 @@ RUN curl -fSL "https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailH
     && chmod +x /usr/local/bin/mailhog
 
 COPY ./mailhog.ini /usr/local/etc/php/conf.d/
+
+WORKDIR /storage
