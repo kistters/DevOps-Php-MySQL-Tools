@@ -24,12 +24,20 @@ RUN docker-php-ext-install \
   xsl \
   zip
 
+# MongoDB
+RUN apt-get update && apt-get install -y libssl-dev ##&& rm -rf /var/lib/apt/lists/*
+
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
+
 # xDebug
 RUN apt-get update -y && apt-get install -y \
-  && pecl install xdebug  \
+    && pecl install xdebug  \
     && docker-php-ext-enable xdebug
 
-COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+ADD ./xdebug.ini /usr/local/etc/php/conf.d/
+
+
 
 RUN curl -sS https://getcomposer.org/installer | \
   php -- --install-dir=/usr/local/bin --filename=composer
@@ -39,6 +47,6 @@ RUN curl -sS https://getcomposer.org/installer | \
 RUN curl -fSL "https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailHog_linux_amd64" -o /usr/local/bin/mailhog \
     && chmod +x /usr/local/bin/mailhog
 
-COPY ./mailhog.ini /usr/local/etc/php/conf.d/
+ADD ./mailhog.ini /usr/local/etc/php/conf.d/
 
 WORKDIR /storage
