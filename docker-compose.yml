@@ -54,7 +54,7 @@ services:
     #     file: tools/tools.yml
     #     service: redis
 
-# Using to test concepts 
+#Using to test concepts 
     elasticsearch:
         image: elasticsearch:latest
         restart: always
@@ -62,6 +62,18 @@ services:
         ports:
             - "9200:9200"
             - "9300:9300"
+        networks:
+            - network-back
+
+    mongo:
+        image: mongo
+        restart: always
+        container_name: work_mongo
+        ports:
+            - "27017:27017"
+        volumes:
+            - ./mongo/data:/data/db
+            - ./mongo/config:/data/configdb
         networks:
             - network-back
 
