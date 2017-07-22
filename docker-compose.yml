@@ -12,14 +12,15 @@ services:
             - ./nginx/includes.d:/etc/nginx/includes.d # dir usado para includes files nginx config
             - ./nginx/conf.d:/etc/nginx/conf.d
             - /storage:/storage # local dir [projects] remember {find . -type f -exec chmod 544 {} \; && find . -type d -exec chmod 755 {} \;}
+        command: [nginx-debug, '-g', 'daemon off;']
         networks:
             - network-back
 
 # PHPs extends file: é a referencia :D assim deixo tudo separado
-    php-7:
-      extends:
-        file: php/php.yml
-        service: php-7
+    # php-7:
+    #   extends:
+    #     file: php/php.yml
+    #     service: php-7
 
     php-7-alpine:
       extends:
@@ -49,10 +50,10 @@ services:
         file: tools/tools.yml
         service: phpmyadmin
 
-    mailhog:
-      extends:
-        file: tools/tools.yml
-        service: mailhog
+    # mailhog:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: mailhog
 
     # redis:
     #   extends:
@@ -60,15 +61,15 @@ services:
     #     service: redis
 
 #Using to test concepts 
-    elasticsearch:
-        image: elasticsearch:latest
-        restart: always
-        container_name: work_elastic
-        ports:
-            - "9200:9200"
-            - "9300:9300"
-        networks:
-            - network-back
+    # elasticsearch:
+    #     image: elasticsearch:latest
+    #     restart: always
+    #     container_name: work_elastic
+    #     ports:
+    #         - "9200:9200"
+    #         - "9300:9300"
+    #     networks:
+    #         - network-back
 
     # mongo:
     #     image: mongo

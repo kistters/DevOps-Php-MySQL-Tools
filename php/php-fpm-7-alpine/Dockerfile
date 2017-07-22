@@ -1,43 +1,45 @@
-FROM alpine:edge
+FROM php:7.1-fpm-alpine
 
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk --update add \
-        php7 \
-        php7-bcmath \
-        php7-dom \
-        php7-ctype \
-        php7-curl \
-        php7-fileinfo \
-        php7-fpm \
-        php7-gd \
-        php7-iconv \
-        php7-intl \
-        php7-json \
-        php7-mbstring \
-        php7-mcrypt \
-        php7-mysqlnd \
-        php7-opcache \
-        php7-openssl \
-        php7-pdo \
-        php7-pdo_mysql \
-        php7-pdo_pgsql \
-        php7-pdo_sqlite \
-        php7-phar \
-        php7-posix \
-        php7-session \
-        php7-soap \
-        php7-xml \
-        php7-xmlreader \
-        php7-xmlwriter \
-        php7-zip \
-        php7-simplexml \
-        php7-xsl \
-    && rm -rf /var/cache/apk/*
+RUN apk add --no-cache \
+    libpng libpng-dev libjpeg-turbo-dev  \    
+    && docker-php-ext-configure gd  \
+        --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install \
+        gd 
 
-ADD php-fpm.conf /etc/php7/php-fpm.d/www.conf
+RUN apk add --no-cache \
+    libmcrypt-dev \
+    && docker-php-ext-install \
+        mcrypt \
+        pdo_mysql 
+
+RUN apk add --update --no-cache \
+    libintl icu icu-dev libxml2-dev \
+    && docker-php-ext-install \
+        intl zip 
+
+RUN apk add --update --no-cache \
+    libxslt-dev \
+    && docker-php-ext-install \
+        xsl
+
+RUN apk add --update --no-cache \
+        curl \ 
+        g++ \
+        make \
+        autoconf \
+    && docker-php-source extract \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && docker-php-source delete \
+    && rm -rf /tmp/*
+
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN curl -sS https://getcomposer.org/installer | \
+  php -- --install-dir=/usr/local/bin --filename=composer
+
+
+USER www-data
 
 WORKDIR /storage
-
-EXPOSE 9000
-
-CMD ["php-fpm7", "-F"]
