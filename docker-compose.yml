@@ -21,6 +21,11 @@ services:
         file: php/php.yml
         service: php-7
 
+    php-7-alpine:
+      extends:
+        file: php/php.yml
+        service: php-7-alpine
+
     # php-5.6:
     #   extends:
     #     file: php/php.yml
@@ -65,23 +70,19 @@ services:
         networks:
             - network-back
 
-    mongo:
-        image: mongo
-        restart: always
-        container_name: work_mongo
-        ports:
-            - "27017:27017"
-        volumes:
-            - ./mongo/data:/data/db
-            - ./mongo/config:/data/configdb
-        networks:
-            - network-back
+    # mongo:
+    #     image: mongo
+    #     restart: always
+    #     container_name: work_mongo
+    #     ports:
+    #         - "27017:27017"
+    #     volumes:
+    #         - ./mongo/data:/data/db
+    #         - ./mongo/config:/data/configdb
+    #     networks:
+    #         - network-back
 
 # Networks links internos para os services names ;)
 networks:
-    # basicamente o nginx, e quem precisa dele.
-    network-front:
-        driver: bridge
-    # basicamente o que NAO precisa do nginx.
     network-back:
         driver: bridge

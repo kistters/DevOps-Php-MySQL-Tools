@@ -21,19 +21,10 @@ services:
         networks:
             - network-back
 
-    php-5.4:
-        build: php-fpm-5.4
+    php-7-alpine:
+        build: php-fpm-7-alpine
         restart: always
-        container_name: work_php-5.4
-        volumes:
-            - /storage:/storage
-        networks:
-            - network-back
-
-    php-5.3:
-        build: php-fpm-5.3
-        restart: always
-        container_name: work_php-5.3
+        container_name: work_php-7-alpine
         volumes:
             - /storage:/storage
         networks:
