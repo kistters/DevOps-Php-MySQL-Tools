@@ -1,9 +1,9 @@
 FROM php:7.1-fpm-alpine
 
 RUN apk add --no-cache \
-    libpng libpng-dev libjpeg-turbo-dev  \    
+    libpng libpng-dev libjpeg-turbo-dev freetype-dev \    
     && docker-php-ext-configure gd  \
-        --with-jpeg-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ --with-freetype-dir=/usr/include \
     && docker-php-ext-install \
         gd 
 
