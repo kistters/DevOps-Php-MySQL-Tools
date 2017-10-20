@@ -10,6 +10,8 @@ services:
             - ./data/mysql-5.7:/var/lib/mysql
             - ./dumps:/dumps
             #- ./my.conf:/etc/mysql/my.cnf
+        ports:
+            - "3306:3306"
         environment:
             MYSQL_USERNAME: root
             MYSQL_ROOT_PASSWORD: root
@@ -23,6 +25,8 @@ services:
         volumes:
             - ./data/percona:/var/lib/mysql
             - ./dumps:/dumps
+        ports:
+            - "3306:3306"
         environment:
           MYSQL_USERNAME: root
           MYSQL_ROOT_PASSWORD: root

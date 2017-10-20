@@ -13,7 +13,7 @@
 #    include /etc/nginx/includes.d/nginx.conf.sample;
 # }
 #
-
+  
   location / {
    try_files $uri $uri/ /index.php$is_args$args;
   }
@@ -24,7 +24,7 @@
     deny all;
     include /etc/nginx/fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /status;
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass fastcgi_backend;
   }
 
   location /ping {
@@ -32,7 +32,7 @@
     allow all;
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /ping;
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass fastcgi_backend;
   }
 
   location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
