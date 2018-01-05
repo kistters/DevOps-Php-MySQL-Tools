@@ -8,6 +8,7 @@
 # }
 # server {
 #    listen 80;
+#    index index.php index.html;
 #    server_name it.mage;
 #    root /var/www/magento;
 #    include /etc/nginx/includes.d/nginx.conf.sample;
