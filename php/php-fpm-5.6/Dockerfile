@@ -19,15 +19,6 @@ RUN apt-get update -y && apt-get install -y \
  	libpng-dev \
 	&& docker-php-ext-install gd
 
-
-# php soap
-RUN apt-get update -y && apt-get install -y \
-    libxml2-dev \
-    php-soap \
-  	&& apt-get clean -y \
-  	&& docker-php-ext-install soap
-
-
 # xDebug
 RUN apt-get update -y && apt-get install -y \
  	&& pecl install xdebug  \

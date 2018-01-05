@@ -2,6 +2,7 @@
 # upstream fastcgi_backend {
 #    # use tcp connection
 #    # server  127.0.0.1:9000;
+#    #     server  php-5.6:9000;
 #    # or socket
 #    server   unix:/var/run/php5-fpm.sock;
 #    server   unix:/var/run/php/php7.0-fpm.sock;
@@ -11,7 +12,7 @@
 #    index index.php index.html;
 #    server_name it.mage;
 #    root /var/www/magento;
-#    include /etc/nginx/includes.d/nginx.conf.sample;
+#    include /etc/nginx/includes.d/mage;
 # }
 #
   

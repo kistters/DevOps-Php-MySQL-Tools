@@ -11,20 +11,16 @@ services:
         volumes:
             - ./nginx/includes.d:/etc/nginx/includes.d # dir usado para includes files nginx config
             - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/ssl:/etc/nginx/ssl
             - /storage:/storage # local dir [projects] remember {find . -type f -exec chmod 544 {} \; && find . -type d -exec chmod 755 {} \;}
         networks:
             - network-back
 
 # PHPs extends file: é a referencia :D assim deixo tudo separado
-    # php-7:
-    #   extends:
-    #     file: php/php.yml
-    #     service: php-7
-
-    # php-7-alpine:
-    #   extends:
-    #     file: php/php.yml
-    #     service: php-7-alpine
+    php-7:
+      extends:
+        file: php/php.yml
+        service: php-7
 
     php-5.6:
       extends:
@@ -54,10 +50,10 @@ services:
         file: tools/tools.yml
         service: mailhog
 
-    # redis:
-    #   extends:
-    #     file: tools/tools.yml
-    #     service: redis
+    redis:
+      extends:
+        file: tools/tools.yml
+        service: redis
 
 #Using to test concepts 
     # elasticsearch:

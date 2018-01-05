@@ -20,12 +20,3 @@ services:
             - /storage:/storage
         networks:
             - network-back
-
-    php-7-alpine:
-        build: php-fpm-7-alpine
-        restart: always
-        container_name: work_php-7-alpine
-        volumes:
-            - /storage:/storage
-        networks:
-            - network-back
