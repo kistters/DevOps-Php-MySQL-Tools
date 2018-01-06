@@ -3,7 +3,7 @@ version: '2'
 services:
 # Nginx :0  easy way :80 :D 
     web:
-        image: nginx:latest
+        image: nginx:1.13.8
         container_name: work_nginx
         ports:
             - "80:80"
@@ -40,20 +40,20 @@ services:
         service: percona
 
 # USAR extends para Tools ;D
-    phpmyadmin:
-      extends:
-        file: tools/tools.yml
-        service: phpmyadmin
+    # phpmyadmin:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: phpmyadmin
 
-    mailhog:
-      extends:
-        file: tools/tools.yml
-        service: mailhog
+    # mailhog:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: mailhog
 
-    redis:
-      extends:
-        file: tools/tools.yml
-        service: redis
+    # redis:
+    #   extends:
+    #     file: tools/tools.yml
+    #     service: redis
 
 #Using to test concepts 
     # elasticsearch:

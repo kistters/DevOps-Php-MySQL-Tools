@@ -3,19 +3,18 @@
 ```
 docker-compose v2
 ```
-- `nginx:latest`
-- `php-fpm:7~`
-- `alpine-php-fpm:7`
-- `php-fpm:5.6~`
-- `mysql:5.7~`
+- `nginx:1.13.8`
+- `php:7.0.21-fpm`
+- `php:5.6-fpm`
+- `percona`
 - `mysql:percona`
-- `phpmyadmin`
-- `mailhog`
-- `elasticsearch`
+- `tools | phpmyadmin | mailhog redis`
 
-###referências
-- [https://github.com/docker-library](https://github.com/docker-library/php/blob/master/README.md).
-- [https://github.com/mikechernev](https://github.com/mikechernev/dockerised-php/blob/master/README.md).
-- [https://github.com/andreaskoch](https://github.com/andreaskoch/dockerized-magento/blob/master/README.md).
-- [https://github.com/mailhog](https://github.com/mailhog/MailHog/blob/master/README.md).
+## Magento 2
+``
+- nstall using composer 
 
+docker exec -it work_php-7 bash
+composer create-project --prefer-dist --repository-url=https://repo.magento.com/ magento/project-community-edition /storage/<diretory> 2.2
+
+``

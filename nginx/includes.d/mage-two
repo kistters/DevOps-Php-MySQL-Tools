@@ -1,19 +1,18 @@
 ## Example configuration:
-# upstream fastcgi_backend {
+# upstream fastcgi_backend_magetwo {
 #    # use tcp connection
-#    # server  127.0.0.1:9000;
-#    # server  php-5.6:9000;;
-#    # or socket
-#    server   unix:/var/run/php5-fpm.sock;
-#    server   unix:/var/run/php/php7.0-fpm.sock;
+#    server  php-7:9000;
 # }
+#
 # server {
 #    listen 80;
-#    server_name mage.dev;
+#
+#    index index.php index.html;
+#    server_name mage.two;
 #    set $MAGE_ROOT /var/www/magento2;
 #    include /etc/nginx/includes.d/mage-two;
 # }
-#
+############################################################
 ## Optional override of deployment mode. We recommend you use the
 ## command 'bin/magento deploy:mode:set' to switch modes instead.
 ##
@@ -26,6 +25,7 @@
 ## fastcgi_param  MAGE_MODE $MAGE_MODE;
 ##
 ## In production mode, you should uncomment the 'expires' directive in the /static/ location block
+############################################################
 
 root $MAGE_ROOT/pub;
 
@@ -39,7 +39,7 @@ error_page 404 403 = /errors/404.php;
 location ~* ^/setup($|/) {
     root $MAGE_ROOT;
     location ~ ^/setup/index.php {
-        fastcgi_pass   fastcgi_backend;
+        fastcgi_pass   fastcgi_backend_magetwo;
 
         fastcgi_param  PHP_FLAG  "session.auto_start=off \n suhosin.session.cryptua=off";
         fastcgi_param  PHP_VALUE "memory_limit=768M \n max_execution_time=600";
@@ -66,7 +66,7 @@ location ~* ^/update($|/) {
 
     location ~ ^/update/index.php {
         fastcgi_split_path_info ^(/update/index.php)(/.+)$;
-        fastcgi_pass   fastcgi_backend;
+        fastcgi_pass   fastcgi_backend_magetwo;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         fastcgi_param  PATH_INFO        $fastcgi_path_info;
@@ -165,7 +165,7 @@ location /media/import/ {
 # PHP entry point for main application
 location ~ (index|get|static|report|404|503)\.php$ {
     try_files $uri =404;
-    fastcgi_pass   fastcgi_backend;
+    fastcgi_pass   fastcgi_backend_magetwo;
     fastcgi_buffers 1024 4k;
 
     fastcgi_param  PHP_FLAG  "session.auto_start=off \n suhosin.session.cryptua=off";

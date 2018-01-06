@@ -1,21 +1,19 @@
- ## Example configuration:
-# upstream fastcgi_backend {
+## Example configuration:
+# upstream fastcgi_backend_mage {
 #    # use tcp connection
-#    # server  127.0.0.1:9000;
-#    #     server  php-5.6:9000;
-#    # or socket
-#    server   unix:/var/run/php5-fpm.sock;
-#    server   unix:/var/run/php/php7.0-fpm.sock;
-# }
-# server {
-#    listen 80;
-#    index index.php index.html;
-#    server_name it.mage;
-#    root /var/www/magento;
-#    include /etc/nginx/includes.d/mage;
+#    server  php-5.6:9000;
 # }
 #
-  
+# server {
+#    listen 80;
+#
+#    index index.php index.html;
+#    server_name mage.one;
+#    root /storage/magento;
+#    include /etc/nginx/includes.d/mage;
+# }
+############################################################
+
   location / {
    try_files $uri $uri/ /index.php$is_args$args;
   }
@@ -26,7 +24,7 @@
     deny all;
     include /etc/nginx/fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /status;
-    fastcgi_pass fastcgi_backend;
+    fastcgi_pass fastcgi_backend_mage;
   }
 
   location /ping {
@@ -34,7 +32,7 @@
     allow all;
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /ping;
-    fastcgi_pass fastcgi_backend;
+    fastcgi_pass fastcgi_backend_mage;
   }
 
   location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
@@ -47,7 +45,7 @@
      try_files $uri =404;
      fastcgi_split_path_info ^(.+\.php)(/.+)$;
      #fastcgi_pass php-5.6:9000;
-     fastcgi_pass fastcgi_backend;
+     fastcgi_pass fastcgi_backend_mage;
      fastcgi_index index.php;
      include fastcgi_params;
      if ($STORE_CODE = "") {
