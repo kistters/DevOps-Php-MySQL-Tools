@@ -1,18 +1,13 @@
-## Recursos 
-
 ```
 docker-compose v2
 ```
 - `nginx:1.13.8`
 - `php:7.0.21-fpm`
 - `php:5.6-fpm`
-- `percona`
 - `mysql:percona`
-
- tools
 - `phpmyadmin | mailhog | redis`
 
-## Magento 2
+##### Magento 2
 ```
 - install using composer 
 
