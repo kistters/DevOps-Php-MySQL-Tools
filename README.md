@@ -8,13 +8,15 @@ docker-compose v2
 - `php:5.6-fpm`
 - `percona`
 - `mysql:percona`
-- `tools | phpmyadmin | mailhog redis`
+
+ tools
+- `phpmyadmin | mailhog | redis`
 
 ## Magento 2
-``
-- nstall using composer 
+```
+- install using composer 
 
-docker exec -it work_php-7 bash
-composer create-project --prefer-dist --repository-url=https://repo.magento.com/ magento/project-community-edition /storage/<diretory> 2.2
+$ docker exec -it work_php-7 bash
+$ composer create-project --prefer-dist --repository-url=https://repo.magento.com/ magento/project-community-edition /storage/<diretory> 2.2
 
-``
+```
