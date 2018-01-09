@@ -50,10 +50,10 @@ services:
     #     file: tools/tools.yml
     #     service: mailhog
 
-    # redis:
-    #   extends:
-    #     file: tools/tools.yml
-    #     service: redis
+    redis:
+      extends:
+        file: tools/tools.yml
+        service: redis
 
 #Using to test concepts 
     # elasticsearch:
