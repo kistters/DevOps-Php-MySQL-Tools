@@ -15,7 +15,7 @@ exemplo no aqruivo nginx/sample-nginx.conf
 crie um <filename>.conf dentro do diretório nginx/conf.d
 lembre-se, server_name tem de estar configurado, no linux /etc/hosts
 ```
-- instalar usando composer 
+- instalar usando composer (rodar os comandos após subir os containers 'docker-compose up')
 ```
 $ docker exec -it work_php-7 bash
 $ composer create-project --prefer-dist --repository-url=https://repo.magento.com/ magento/project-community-edition /storage/<diretory> 2.2
