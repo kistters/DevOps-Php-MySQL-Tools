@@ -11,7 +11,7 @@ docker-compose v2
 
 - config nginx
 ```
-exemplo no aqruivo nginx/sample-nginx.conf
+exemplo no arquivo nginx/sample-nginx.conf
 crie um <filename>.conf dentro do diretório nginx/conf.d
 lembre-se, server_name tem de estar configurado, no linux /etc/hosts
 ```
