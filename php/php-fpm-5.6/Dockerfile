@@ -14,6 +14,11 @@ RUN apt-get update && apt-get install -y \
 		mbstring \
 		zip
 
+# Install PHP Soap
+RUN apt-get update &&  apt-get install -y \
+	libxml2-dev && \
+    docker-php-ext-install soap
+
 # php gd
 RUN apt-get update -y && apt-get install -y \
  	libpng-dev \
@@ -36,6 +41,5 @@ RUN curl -fSL "https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailH
     && chmod +x /usr/local/bin/mailhog
 
 COPY ./mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
-
 
 CMD ["php-fpm"]

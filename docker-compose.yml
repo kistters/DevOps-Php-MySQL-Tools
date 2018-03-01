@@ -40,15 +40,15 @@ services:
         service: percona
 
 # USAR extends para Tools ;D
-    # phpmyadmin:
-    #   extends:
-    #     file: tools/tools.yml
-    #     service: phpmyadmin
+    phpmyadmin:
+      extends:
+        file: tools/tools.yml
+        service: phpmyadmin
 
-    # mailhog:
-    #   extends:
-    #     file: tools/tools.yml
-    #     service: mailhog
+    mailhog:
+      extends:
+        file: tools/tools.yml
+        service: mailhog
 
     redis:
       extends:
