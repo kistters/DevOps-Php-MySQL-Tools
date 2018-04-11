@@ -14,11 +14,6 @@ RUN apt-get update && apt-get install -y \
 		mbstring \
 		zip
 
-# Install PHP Soap
-RUN apt-get update &&  apt-get install -y \
-	libxml2-dev && \
-    docker-php-ext-install soap
-
 # php gd
 RUN apt-get update -y && apt-get install -y \
  	libpng-dev \
@@ -35,6 +30,10 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN pecl install apcu-4.0.11 \
     && echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini
 
+# Install PHP Soap
+RUN apt-get update &&  apt-get install -y \
+	libxml2-dev && \
+    docker-php-ext-install soap
 
 # Install mailhog.
 RUN curl -fSL "https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailHog_linux_amd64" -o /usr/local/bin/mailhog \
