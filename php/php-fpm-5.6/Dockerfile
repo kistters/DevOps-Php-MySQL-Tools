@@ -21,7 +21,8 @@ RUN apt-get update -y && apt-get install -y \
 
 # xDebug
 RUN apt-get update -y && apt-get install -y \
- 	&& pecl install xdebug  \
+    && pecl channel-update pecl.php.net \
+ 	&& pecl install xdebug-2.2.7  \
     && docker-php-ext-enable xdebug
 
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
