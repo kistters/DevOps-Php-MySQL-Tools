@@ -7,7 +7,7 @@ docker-compose v2
 - `mysql:percona`
 - `phpmyadmin | mailhog | redis`
 
-**[[Submit Suggestion](https://github.com/kistters/DevOps-Php-MySQL-Tools/issues/new)]**
+**[[Suggestion/Issue](https://github.com/kistters/DevOps-Php-MySQL-Tools/issues/new)]**
 
 ##### Magento 2
 
