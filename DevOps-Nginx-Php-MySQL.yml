@@ -1,0 +1,89 @@
+version: '3'
+services:
+
+  proxy:
+    image: nginx:1.13.8
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/includes.d:/etc/nginx/includes.d
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - /storage:/storage
+    networks:
+      - backend
+
+  php-7:
+    image: devops-php7-alpine
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: 128M
+    volumes:
+      - /storage:/storage  
+    networks:
+      - backend
+
+  # php-5.6:
+  #   image: devops-php5.6-alpine
+  #   deploy:
+  #     replicas: 3
+  #     resources:
+  #       limits:
+  #         cpus: "0.8"
+  #         memory: 256M
+  #   volumes:
+  #     - /storage:/storage  
+  #   networks:
+  #     - backend
+
+  percona:
+    image: percona
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+    volumes:
+        - ./mysql/data:/var/lib/mysql
+        - ./mysql/dumps:/dumps
+        - ./mysql/my.conf:/etc/mysql/my.cnf
+    ports:
+        - "3306:3306"
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+        - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+        PMA_ARBITRARY: 1
+    ports:
+        - 8888:80
+    volumes:
+        - /sessions
+    networks:
+        - backend
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+        - backend
+networks:
+  backend:
