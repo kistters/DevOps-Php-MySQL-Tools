@@ -19,6 +19,8 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
       - /storage:/storage
+    networks:
+      - backend
     depends_on:
       - php-5
       - php-7
@@ -65,7 +67,8 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: root
-
+    networks:
+        - backend
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -75,9 +78,15 @@ services:
         - 8888:80
     volumes:
         - /sessions
-
+    networks:
+        - backend
 
   redis:
     image: redis
     ports:
       - "6379:6379"
+    networks:
+        - backend
+
+networks:
+  backend:
