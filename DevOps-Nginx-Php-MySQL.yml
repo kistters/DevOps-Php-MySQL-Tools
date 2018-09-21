@@ -4,7 +4,7 @@ services:
   proxy:
     image: nginx:1.13.8
     deploy:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpus: "0.5"
@@ -28,7 +28,7 @@ services:
   php-7:
     image: devops-php7-alpine
     deploy:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpus: "0.8"
@@ -41,7 +41,7 @@ services:
   php-5:
     image: devops-php5.6-alpine
     deploy:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpus: "0.8"
