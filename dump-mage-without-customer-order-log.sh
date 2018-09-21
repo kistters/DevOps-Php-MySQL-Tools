@@ -1,7 +1,7 @@
 
 DATABASE_NAME=community
 
-mysqldump -u root -p --no-data dbname > $(date +'%d-%m-%Y')-$DATABASE_NAME-schema.sql
+#mysqldump -u root -p --no-data dbname > schema.sql
 
 mysqldump -u root -p  $DATABASE_NAME \
 --ignore-table=$DATABASE_NAME.sales_billing_agreement \
@@ -63,4 +63,63 @@ mysqldump -u root -p  $DATABASE_NAME \
 --ignore-table=$DATABASE_NAME.report_viewed_product_aggregated_monthly \
 --ignore-table=$DATABASE_NAME.report_viewed_product_aggregated_yearly \
 --ignore-table=$DATABASE_NAME.report_viewed_product_index \
-> $(date +'%d-%m-%Y')-$DATABASE_NAME-dump.sql
+> $(date +'%d-%m-%Y')-$DATABASE_NAME.sql
+
+
+mysqldump -u root -p --no-data $DATABASE_NAME \
+sales_billing_agreement \
+sales_billing_agreement_order \
+sales_flat_creditmemo \
+sales_flat_creditmemo_comment \
+sales_flat_creditmemo_grid \
+sales_flat_creditmemo_item \
+sales_flat_invoice \
+sales_flat_invoice_comment \
+sales_flat_invoice_grid \
+sales_flat_invoice_item \
+sales_flat_order \
+sales_flat_order_address \
+sales_flat_order_grid \
+sales_flat_order_item \
+sales_flat_order_payment \
+sales_flat_order_status_history \
+sales_flat_quote \
+sales_flat_quote_address \
+sales_flat_quote_address_item \
+sales_flat_quote_item \
+sales_flat_quote_item_option \
+sales_flat_quote_payment \
+sales_flat_quote_shipping_rate \
+sales_flat_shipment \
+sales_flat_shipment_comment \
+sales_flat_shipment_grid \
+sales_flat_shipment_item \
+sales_flat_shipment_track \
+customer_entity \
+customer_entity_datetime \
+customer_entity_decimal \
+customer_entity_int \
+customer_entity_text \
+customer_entity_varchar \
+customer_flowpassword \
+customer_address_entity \
+customer_address_entity_datetime \
+customer_address_entity_decimal \
+customer_address_entity_int \
+customer_address_entity_text \
+customer_address_entity_varchar \
+log_customer \
+log_quote \
+log_summary \
+log_summary_type \
+log_url \
+log_url_info \
+log_visitor \
+log_visitor_info \
+log_visitor_online \
+report_event \
+report_viewed_product_aggregated_daily \
+report_viewed_product_aggregated_monthly \
+report_viewed_product_aggregated_yearly \
+report_viewed_product_index \
+> $(date +'%d-%m-%Y')-schema-$DATABASE_NAME.sql
