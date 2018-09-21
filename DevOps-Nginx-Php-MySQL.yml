@@ -48,7 +48,8 @@ services:
           memory: 2G
     volumes:
       - /storage:/storage  
-
+    networks:
+      - backend
 
   percona:
     image: percona
