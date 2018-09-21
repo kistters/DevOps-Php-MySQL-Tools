@@ -3,30 +3,12 @@ version: '2'
 services:
 # PHPs usei o build [diretorios] para instalar libs ;)
 
-    php-7:
-        build: php-fpm-7
-        restart: always
-        container_name: work_php-7
-        volumes:
-            - /storage:/storage # lembrando de configurar o volumes com a pasta dos seus projetos
-        networks:
-            - network-back
-
     php-7-alpine:
         build: php-fpm-7-alpine
         restart: always
         container_name: work_php-7-alpine
         volumes:
             - /storage:/storage # lembrando de configurar o volumes com a pasta dos seus projetos
-        networks:
-            - network-back
-
-    php-5.6:
-        build: php-fpm-5.6
-        restart: always
-        container_name: work_php-5.6
-        volumes:
-            - /storage:/storage
         networks:
             - network-back
 
