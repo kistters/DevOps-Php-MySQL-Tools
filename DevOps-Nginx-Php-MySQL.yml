@@ -54,11 +54,11 @@ services:
   percona:
     image: percona
     deploy:
-      mode: replicated
-      replicas: 1
+      mode: global
       restart_policy:
         condition: on-failure
         delay: 5s
+        max_attempts: 3
     volumes:
         - ./mysql/data:/var/lib/mysql
         - ./mysql/dumps:/dumps
@@ -85,7 +85,15 @@ services:
   redis:
     image: redis
     ports:
-      - "6379:6379"
+        - "6379:6379"
+    networks:
+        - backend
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+        - "1025:1025"
+        - "8025:8025"
     networks:
         - backend
 
