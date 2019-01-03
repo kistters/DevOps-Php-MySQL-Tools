@@ -49,3 +49,6 @@ quando for preencher o "Database Server Host" coloque:
 ```
 
 <img align="right" src="https://github.com/kistters/Magento2_DevOps/blob/master/.files/mau-mau.png" width="64" height="64" title="Ouçam minha gargalhada fatal - hihihahaha"/>
+
+
+su www-data -s /bin/sh -c 'php -d memory_limit=2G bin/magento setup:di:compile'
