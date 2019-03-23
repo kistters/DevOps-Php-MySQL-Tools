@@ -6,8 +6,8 @@
 #    docker swarm init
 # fi
  
-#docker build -t devops-php7-alpine:latest ./php/php-fpm-7-alpine
-#docker build -t devops-php5.6-alpine:latest ./php/php-fpm-5.6-alpine
+docker build -t devops-php7-alpine:latest ./php/php-fpm-7-alpine
+docker build -t devops-php5.6-alpine:latest ./php/php-fpm-5.6-alpine
 
 # docker stack rm DevOpsNginxPhpMySQL
 # docker stack deploy -c DevOps-Nginx-Php-MySQL.yml DevOpsNginxPhpMySQL
