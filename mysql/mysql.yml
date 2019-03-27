@@ -25,7 +25,7 @@ services:
         volumes:
             - ./data/percona:/var/lib/mysql
             - ./dumps:/dumps
-            #- ./my.conf:/etc/mysql/my.cnf
+            - ./my.conf:/etc/mysql/my.conf
         ports:
             - "3306:3306"
         environment:

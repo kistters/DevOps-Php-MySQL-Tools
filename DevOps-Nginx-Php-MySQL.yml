@@ -3,14 +3,6 @@ services:
 
   proxy:
     image: nginx:1.13.8
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 128M
-      restart_policy:
-        condition: on-failure
     ports:
       - "80:80"
       - "443:443"
@@ -21,20 +13,15 @@ services:
       - /storage:/storage
     networks:
       - backend
-    depends_on:
-      - php-5
-      - php-7
+    # depends_on:
+    #   - php-5
+    #   - php-7
 
   php-7:
     image: devops-php7-alpine
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: "0.8"
-          memory: 2G
     volumes:
-      - /storage:/storage  
+      - /storage:/storage
+      - ./php/php_xdebug.sh:/srv/php_xdebug.sh
     networks:
       - backend
 
@@ -47,21 +34,17 @@ services:
           cpus: "0.8"
           memory: 2G
     volumes:
-      - /storage:/storage  
+      - /storage:/storage
+      - ./php/php_xdebug.sh:/srv/php_xdebug.sh
     networks:
       - backend
 
   percona:
     image: percona
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
     volumes:
-        - ./mysql/data:/var/lib/mysql
+        - ./mysql/data/percona:/var/lib/mysql
         - ./mysql/dumps:/dumps
+        - ./mysql/my.conf:/etc/mysql/my.conf
     ports:
         - "3306:3306"
     environment:
