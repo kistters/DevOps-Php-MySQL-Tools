@@ -7,8 +7,9 @@ RUN apk add --no-cache \
     && docker-php-ext-configure gd  \
         --with-jpeg-dir=/usr/include/ --with-freetype-dir=/usr/include \
     && docker-php-ext-install \
-        gd mcrypt pdo_mysql intl zip \
-        xsl bcmath  soap
+        gd mcrypt pdo_mysql mysqli intl zip \
+        xsl bcmath  soap xmlrpc opcache \
+    && docker-php-ext-enable mysqli
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data 
 
@@ -33,5 +34,7 @@ RUN apk add --update --no-cache \
     && rm -rf /tmp/*
 
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY ./improve.ini /usr/local/etc/php/conf.d/improve.ini
 
 CMD ["php-fpm"]
